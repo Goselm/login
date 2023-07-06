@@ -1,5 +1,4 @@
 package com.steven_202102267.login;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,7 +12,6 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import cz.msebera.android.httpclient.Header;
-
 public class MainActivity extends AppCompatActivity {
     private Button _loginButton;
     private EditText _idEditText;
@@ -22,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private String _id;
     private String _password;
     private String _url;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
                         if (!hasil.equals("[{\"idCount\":\"1\"}]")){
                             Toast.makeText(getApplicationContext(), "ID dan password anda tidak cocok.", Toast.LENGTH_SHORT).show();
                             return;
-
                         }
                         Toast.makeText(getApplicationContext(), "Selamat datang," + _id, Toast.LENGTH_SHORT).show();
                         _menuIntent = new Intent(getApplicationContext(), MenuActivity.class);
