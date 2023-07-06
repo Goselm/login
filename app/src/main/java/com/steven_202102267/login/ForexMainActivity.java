@@ -1,5 +1,4 @@
 package com.steven_202102267.login;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -15,17 +14,14 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import java.text.DecimalFormat;
 
 import cz.msebera.android.httpclient.Header;
-
 public class ForexMainActivity extends AppCompatActivity {
     private ProgressBar loadingProgressBar;
     private SwipeRefreshLayout swipeRefreshlayout1;
     private TextView audTextView, bndTextView, btcTextView, eurTextView, gbpTextView, hkdTextView, inrTextView, jpyTextView, myrTextView, usdTextView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forex_main);
-
         swipeRefreshlayout1 = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout1);
         audTextView = (TextView) findViewById(R.id.audTextView);
         bndTextView = (TextView) findViewById(R.id.bndTextView);
@@ -38,11 +34,9 @@ public class ForexMainActivity extends AppCompatActivity {
         myrTextView = (TextView) findViewById(R.id.myrTextView);
         usdTextView = (TextView) findViewById(R.id.usdTextView);
         loadingProgressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
-
         initSwipeRefreshLayout();
         initForex();
     }
-
     private void initSwipeRefreshLayout(){
         swipeRefreshlayout1.setOnRefreshListener(() ->{
             initForex();
@@ -55,9 +49,7 @@ public class ForexMainActivity extends AppCompatActivity {
     }
     private void initForex(){
         loadingProgressBar.setVisibility(TextView.VISIBLE);
-
         String url = "https://openexchangerates.org/api/latest.json?app_id=c5a98cbb411d4b258498f331b9dbf04b";
-
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         asyncHttpClient.get(url, new AsyncHttpResponseHandler() {
             @Override
@@ -65,7 +57,6 @@ public class ForexMainActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 ForexRootModel rootModel = gson.fromJson(new String(responseBody), ForexRootModel.class);
                 ForexRatesModel ratesModel = rootModel.getForexRatesModel();
-
                 double aud = ratesModel.getIDR() / ratesModel.getAUD();
                 double bnd = ratesModel.getIDR() / ratesModel.getBND();
                 double btc = ratesModel.getIDR() / ratesModel.getBTC();
@@ -76,7 +67,6 @@ public class ForexMainActivity extends AppCompatActivity {
                 double jpy = ratesModel.getIDR() / ratesModel.getJPY();
                 double myr = ratesModel.getIDR() / ratesModel.getMYR();
                 double idr = ratesModel.getIDR();
-
                 audTextView.setText((formatNumber(aud, "###,##0.##")));
                 bndTextView.setText((formatNumber(bnd, "###,##0.##")));
                 btcTextView.setText((formatNumber(btc, "###,##0.##")));
@@ -87,14 +77,11 @@ public class ForexMainActivity extends AppCompatActivity {
                 jpyTextView.setText((formatNumber(jpy, "###,##0.##")));
                 myrTextView.setText((formatNumber(myr, "###,##0.##")));
                 usdTextView.setText((formatNumber(idr, "###,##0.##")));
-
                 loadingProgressBar.setVisibility(TextView.INVISIBLE);
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-
                 loadingProgressBar.setVisibility(TextView.INVISIBLE);
             }
         });
