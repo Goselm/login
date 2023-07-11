@@ -1,6 +1,8 @@
 package com.steven_202102267.login;
 
-public class ForexRatesModel {private double AUD, BND, BTC, EUR, GBP, HKD, IDR, INR, JPY, MYR; public ForexRatesModel(){}public double getAUD() {return AUD;}
+public class ForexRatesModel {private double AUD, BND, BTC, EUR, GBP, HKD, IDR, INR, JPY, MYR;
+    public ForexRatesModel(){}
+    public double getAUD() {return AUD;}
     public void setAUD(double AUD) {this.AUD = AUD;}
     public double getBND() {return BND;}
     public void setBND(double BND) {this.BND = BND;}
