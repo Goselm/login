@@ -69,7 +69,6 @@ public class TambahMahasiswaActivity extends AppCompatActivity {
                         "&jp=" + jp +
                         "&statusPernikahan=" + statusPernikahan +
                         "&tahunMasuk=" + tahunMasuk;
-                Log.d("*tw*",url);
 
                 AsyncHttpClient ahc = new AsyncHttpClient();
 

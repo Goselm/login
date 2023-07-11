@@ -39,10 +39,14 @@ public class CuacaAdapter extends RecyclerView.Adapter<CuacaViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull CuacaViewHolder holder, int position) {
         CuacaListModel lm = listModelList.get(position);
+
         CuacaWeatherModel wm = lm.getWeatherModelList().get(0);
+
         CuacaMainModel mm = lm.getMainModel();
+
         String suhu = formatNumber(toCelcius(mm.getTemp_min()), "###.##") + "°C - " +
                 formatNumber(toCelcius(mm.getTemp_max()), "###.##") + "°C";
+
         switch (wm.getIcon()){
             case "01d" :
                 holder.cuacaImageView.setImageResource(R.mipmap.ic_01d);
@@ -87,7 +91,7 @@ public class CuacaAdapter extends RecyclerView.Adapter<CuacaViewHolder>{
                 holder.cuacaImageView.setImageResource(R.mipmap.ic_011n);
                 break;
         }
-        String iconUrl = "https://openweather.org/img/wn" + wm.getIcon() + "@2x.png";
+        String iconUrl = "https://openweathermap.org/img/wn" + wm.getIcon() + "@2x.png";
         Picasso.with(_activity).load(iconUrl).into(holder.cuacaImageView);
         
         String tanggalWaktuWib = formatWib(lm.getDt_txt());
@@ -120,7 +124,7 @@ public class CuacaAdapter extends RecyclerView.Adapter<CuacaViewHolder>{
     public int getItemCount() {
         return (listModelList != null) ? listModelList.size() : 0;
     }
-    private double toCelcius(double kelvin){return kelvin = 272.15;}
+    private double toCelcius(double kelvin){return kelvin - 272.15;}
     public String formatNumber(double number, String format){
         DecimalFormat decimalFormat = new DecimalFormat(format);
         return decimalFormat.format(number);

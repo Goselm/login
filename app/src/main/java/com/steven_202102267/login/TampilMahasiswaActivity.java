@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class TampilMahasiswaActivity extends AppCompatActivity {
     private void loadRecyclerView(){
         AsyncHttpClient ahc = new AsyncHttpClient();
         String url = "https://stmikpontianak.net/011100862/tampilMahasiswa.php";
+        Log.d("*tw*",url);
 
         ahc.get(url, new AsyncHttpResponseHandler()
         {
